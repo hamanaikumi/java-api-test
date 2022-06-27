@@ -27,34 +27,27 @@ public class PlayerController {
 		return playerService.findAll();
 	}
 
-//    @GetMapping("/{id}/edit")
-//    public String edit(@PathVariable Long id, Model model) {
-//        model.addAttribute("player", playerService.findOne(id));
-//        return "players/edit";
-//    }
-
 	@GetMapping("{id}")
 	public Player show(@PathVariable Long id) {
 		return playerService.findOne(id);
 	}
 
-//	テスト @ModelAttributeいらない？
 	@PostMapping
-	public String create(@RequestBody Player player) {
+	public Player create(@RequestBody Player player) {
 		playerService.save(player);
-		return "success";
+		return player;
 	}
 
 	@PutMapping("/{id}")
-	public String update(@PathVariable Long id, @RequestBody Player player) {
+	public Player update(@PathVariable Long id, @RequestBody Player player) {
 		player.setId(id);
 		playerService.update(player);
-		return "sccess";
+		return player;
 	}
 
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public String destroy(@PathVariable Long id) {
 		playerService.delete(id);
-		return "redirect:/players";
+		return "delete";
 	}
 }
